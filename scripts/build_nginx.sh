@@ -9,7 +9,7 @@
 # Once the dyno has is 'up' you can open your browser and navigate
 # this dyno's directory structure to download the nginx binary.
 
-NGINX_VERSION=${NGINX_VERSION-1.8.0}
+NGINX_VERSION=${NGINX_VERSION-1.9.6}
 PCRE_VERSION=${PCRE_VERSION-8.37}
 ZLIB_VERSION=${ZLIB_VERSION-1.2.8}
 
@@ -42,6 +42,7 @@ echo "Downloading $zlib_url"
     --with-zlib=zlib-${ZLIB_VERSION} \
     --prefix=/tmp/nginx \
     --with-http_gzip_static_module \
+    --with-http_sub_module \
     --with-cc-opt='-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2' \
     --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,--as-needed'
 
