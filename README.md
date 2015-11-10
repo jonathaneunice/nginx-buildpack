@@ -9,7 +9,7 @@ Some application servers (e.g. Ruby's Unicorn) halt progress when dealing with n
 ## Versions
 
 * Buildpack Version: 0.5
-* NGINX Version: 1.8.0
+* NGINX Version: 1.9.6
 
 ## Requirements
 
@@ -25,6 +25,8 @@ Some application servers (e.g. Ruby's Unicorn) halt progress when dealing with n
 * Crashes dyno if NGINX or App server crashes. Safety first.
 * Language/App Server agnostic.
 * Customizable NGINX config.
+* Adds [ngx_http_sub_module](https://www.nginx.com/resources/wiki/modules/substitutions/) for on-the-fly
+  URL (and other content) substitution in returned content.
 * Application coordinated dyno starts.
 
 ### Logging
@@ -84,7 +86,7 @@ Here are 2 setup examples. One example for a new app, another for an existing ap
 Update Buildpacks
 ```bash
 $ heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
-$ echo 'https://github.com/ryandotsmith/nginx-buildpack.git' >> .buildpacks
+$ echo 'https://github.com/jonathaneunice/nginx-buildpack.git' >> .buildpacks
 $ echo 'https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/ruby.tgz' >> .buildpacks
 $ git add .buildpacks
 $ git commit -m 'Add multi-buildpack'
@@ -156,7 +158,7 @@ Create & Push Heroku App:
 ```bash
 $ heroku create --buildpack https://github.com/ddollar/heroku-buildpack-multi.git
 $ echo 'https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/ruby.tgz' >> .buildpacks
-$ echo 'https://github.com/ryandotsmith/nginx-buildpack.git' >> .buildpacks
+$ echo 'https://github.com/jonathaneunice/nginx-buildpack.git' >> .buildpacks
 $ git add .
 $ git commit -am "init"
 $ git push heroku master
@@ -166,6 +168,8 @@ Visit App
 ```
 $ heroku open
 ```
+
+Code ultimately based on [ryandotsmith/nginx-build](https://github.com/ryandotsmith/nginx-build)
 
 ## License
 Copyright (c) 2013 Ryan R. Smith
